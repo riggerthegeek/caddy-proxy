@@ -1,0 +1,25 @@
+version: "3.4"
+services:
+
+  caddy:
+#     Uncomment section if want to build own images
+#    build:
+#      context: ./
+##      dockerfile: Dockerfile.arm # Uncomment line if on Raspberry Pi
+    image: riggerthegeek/caddy-proxy:latest
+    ports:
+      - 80:80
+      - 443:443
+      - 2015:2015
+    depends_on:
+      - nginx
+    links:
+      - nginx
+    volumes:
+      - .caddy:/opt/certs
+    environment:
+      CA_URL: https://acme-staging.api.letsencrypt.org/directory
+      PROXY_URL: nginx:80
+
+  nginx:
+    image: nginx:latest
