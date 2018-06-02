@@ -22,7 +22,7 @@ should see the nginx welcome page.
   _Defaults to `/opt/certs`_.
 - **CA_URL**: The certificate authority URL. By default, this is empty
   and will generate a Lets Encrypt production certificate. Use
-  `https://acme-staging.api.letsencrypt.org/directory` if you want to
+  `https://acme-staging-v02.api.letsencrypt.org/directory` if you want to
   generate a staging certificate.
 - **EMAIL_ADDRESS**: Admin email for the SSL certificate.
 - **PROXY_CSV**: CSV of URLs to proxy. Can be an external URL or on a
