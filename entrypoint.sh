@@ -53,5 +53,6 @@ cat ${CADDY_FILE}
 echo "==============="
 
 caddy -conf ${CADDY_FILE} \
+  -agree \
   ${CA_ARG} \
   ${EMAIL_ARG}
