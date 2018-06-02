@@ -18,9 +18,8 @@ ARG CADDY_ACCOUNT_ID=""
 ARG CADDY_API_KEY=""
 
 ENV CADDYPATH=/opt/certs
-ENV DOMAIN_NAME=""
 ENV EMAIL_ADDRESS=""
-ENV PROXY_URL=""
+ENV PROXY_CSV=""
 
 ENV CADDY_ACCOUNT_ID=${CADDY_ACCOUNT_ID}
 ENV CADDY_API_KEY=${CADDY_API_KEY}
@@ -29,7 +28,7 @@ VOLUME ${CADDYPATH}
 
 RUN apk add --no-cache bash curl gnupg \
   && curl ${CADDY_URL} | bash -s ${CADDY_LICENSE} ${CADDY_PLUGINS} ${CADDY_ACCESS_CODES} \
-  && apk del bash curl gnupg
+  && apk del curl gnupg
 
 # Validate install
 RUN caddy -version \
