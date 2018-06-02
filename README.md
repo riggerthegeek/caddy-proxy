@@ -24,9 +24,7 @@ should see the nginx welcome page.
   and will generate a Lets Encrypt production certificate. Use
   `https://acme-staging.api.letsencrypt.org/directory` if you want to
   generate a staging certificate.
-- **DOMAIN_NAME**: Domain name this will be hosting. _Defaults to
-  `localhost`_.
 - **EMAIL_ADDRESS**: Admin email for the SSL certificate.
-- **PROXY_URL**: URL to proxy. Can be an external URL or on a private
-  network.
+- **PROXY_CSV**: CSV of URLs to proxy. Can be an external URL or on a
+ private network, eg `domain.com=proxy.url:1234,domain.io=proxy.url:9999`
 

@@ -1,16 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
 mkdir -p /opt/caddy
 export CADDY_FILE=/opt/caddy/caddyfile
 
-if [ -z "${DOMAIN_NAME}" ]; then
-  DOMAIN_NAME=localhost
-fi
-
-if [ -z "${PROXY_URL}" ]; then
-  echo "PROXY_URL is a required environment variable"
+if [ -z "${PROXY_CSV}" ]; then
+  echo "PROXY_CSV is a required environment variable"
   exit 1;
 fi
 
@@ -27,7 +23,17 @@ if [ ! -z "${CA_URL}" ]; then
   CA_ARG="-ca ${CA_URL}"
 fi
 
-cat > ${CADDY_FILE} <<- EOF
+echo ${PROXY_CSV}
+
+IFS=', ' read -r -a array <<< "${PROXY_CSV}"
+
+for element in "${array[@]}"
+do
+  IFS='=' read -r -a item <<< "${element}"
+  DOMAIN_NAME=${item[0]}
+  PROXY_URL=${item[1]}
+
+  cat >> ${CADDY_FILE} <<- EOF
 ${DOMAIN_NAME} {
   log stdout
   errors stdout
@@ -40,6 +46,7 @@ ${DOMAIN_NAME} {
   }
 }
 EOF
+done
 
 echo "===Caddyfile==="
 cat ${CADDY_FILE}
