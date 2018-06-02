@@ -24,7 +24,7 @@ ENV CADDY_API_KEY=${CADDY_API_KEY}
 
 VOLUME ${CADDYPATH}
 
-RUN apk add --no-cache bash curl gnupg \
+RUN apk add --no-cache bash ca-certificates curl gnupg \
   && curl ${CADDY_URL} | bash -s ${CADDY_LICENSE} ${CADDY_PLUGINS} ${CADDY_ACCESS_CODES} \
   && apk del curl gnupg
 
